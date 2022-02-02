@@ -1,6 +1,6 @@
 const container = document.querySelector("#items"); // crée une const container pour l'id items
 
-fetch("http:localhost:3000/api/products")
+fetch("http://localhost:3000/api/products")
     .then(result => {
         return result.json();
     }) // récupère les produits et return en objet json

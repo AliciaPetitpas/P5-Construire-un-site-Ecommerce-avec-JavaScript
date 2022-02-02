@@ -17,10 +17,23 @@ fetch("http://localhost:3000/api/products/" + id)
 
 .then((dataKanap) => {
         allKanap = dataKanap;
-        imgAtt.setAttribute("src", `${allKanap.imageUrl}`);
-        imgAtt.setAttribute("alt", `${allKanap.altTxt}`);
+        let imgEl = document.createElement("img");
+
+        imgEl.setAttribute("src", `${allKanap.imageUrl}`);
+        imgEl.setAttribute("alt", `${allKanap.altTxt}`);
+
+        imgAtt.append(imgEl)
+
         titleAtt.innerHTML = `${allKanap.name}`;
         priceAtt.innerHTML = `${allKanap.price}`;
         descriptionAtt.innerHTML = `${allKanap.description}`;
         colorsAtt.innerHTML += makeColors(allKanap.colors)
     }) // affiche les données du produit choisi
+
+function makeColors(colors) {
+    let html = "";
+    colors.forEach(color => {
+        html += `<option value="${color}">${color}</option>`
+    });
+    return html;
+} // récupère les couleurs du produit

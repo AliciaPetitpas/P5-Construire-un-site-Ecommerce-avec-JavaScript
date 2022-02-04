@@ -42,13 +42,11 @@ const button = document.getElementById("addToCart");
 button.addEventListener("click", () => {
     let idProduct = searchParams.get("id");
     let colorProduct = colors.value;
-
-    if (colors.value == "") {
-        return alert("Veuillez sélectionner une couleur.")
-    }
-
     let quantityProduct = quantity.value;
 
+    if (colorProduct == "") {
+        return alert("Veuillez sélectionner une couleur.")
+    }
     if (quantityProduct < 1) {
         return alert("Veuillez sélectionner une quantité.")
     }
@@ -66,7 +64,7 @@ button.addEventListener("click", () => {
 
     let productAdded = [idProduct, colorProduct, quantityProduct];
 
-    localStorage.setItem("Panier", `${productAdded}`);
+    localStorage.setItem("Panier", productAdded);
 
 })
 

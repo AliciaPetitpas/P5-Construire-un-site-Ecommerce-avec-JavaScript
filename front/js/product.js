@@ -7,8 +7,7 @@ const imgAtt = document.querySelector('.item__img');
 const titleAtt = document.getElementById("title");
 const priceAtt = document.getElementById("price");
 const descriptionAtt = document.getElementById("description");
-const colorsAtt = document.querySelector("#colors");
-const quantity = document.querySelector("#quantity")
+const colorsAtt = document.querySelector("#colors")
 
 fetch("http://localhost:3000/api/products/" + id)
     .then(result => {
@@ -37,3 +36,19 @@ function makeColors(colors) {
     });
     return html;
 } // récupère les couleurs du produit
+
+const button = document.getElementById("addToCart");
+
+button.addEventListener("click", () => {
+    let idProduct = searchParams.get("id");
+    let colorProduct = colors.value;
+    let quantityProduct = quantity.value;
+
+    console.log(`Produit id = ${idProduct}, couleur = ${colorProduct}, quantité = ${quantityProduct}`)
+
+    //let productAdded = [idProduct, colorProduct, quantityProduct];
+
+    localStorage.setItem("ID produit", `${idProduct}`);
+    localStorage.setItem("Couleur choisie", `${colorProduct}`);
+    localStorage.setItem("Quantité choisie", `${quantityProduct}`);
+})

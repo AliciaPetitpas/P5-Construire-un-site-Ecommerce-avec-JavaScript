@@ -56,9 +56,21 @@ button.addEventListener("click", () => {
         return alert("La quantité maximum est de 100.")
     }
 
-    //console.log(`Produit id = ${idProduct}, couleur = ${colorProduct}, quantité = ${quantityProduct}`)
+    class product {
+        constructor(id, color, quantity) {
+            this.id = idProduct;
+            this.color = colorProduct;
+            this.quantity = quantityProduct;
+        }
+    }
 
     let productAdded = [idProduct, colorProduct, quantityProduct];
 
-    localStorage.setItem("Produit ajouté au panier", `${productAdded}`);
+    localStorage.setItem("Panier", `${productAdded}`);
+
 })
+
+//Si productadded != localstorage -> new ligne
+
+//Si productadded (id && color) déjà dans le panier -> + quantity
+//sinon new

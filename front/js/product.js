@@ -42,7 +42,19 @@ const button = document.getElementById("addToCart");
 button.addEventListener("click", () => {
     let idProduct = searchParams.get("id");
     let colorProduct = colors.value;
+
+    if (colors.value == "") {
+        return alert("Veuillez sélectionner une couleur.")
+    }
+
     let quantityProduct = quantity.value;
+
+    if (quantityProduct < 1) {
+        return alert("Veuillez sélectionner une quantité.")
+    }
+    if (quantityProduct > 100) {
+        return alert("La quantité maximum est de 100.")
+    }
 
     console.log(`Produit id = ${idProduct}, couleur = ${colorProduct}, quantité = ${quantityProduct}`)
 

@@ -56,11 +56,9 @@ button.addEventListener("click", () => {
         return alert("La quantité maximum est de 100.")
     }
 
-    console.log(`Produit id = ${idProduct}, couleur = ${colorProduct}, quantité = ${quantityProduct}`)
+    //console.log(`Produit id = ${idProduct}, couleur = ${colorProduct}, quantité = ${quantityProduct}`)
 
-    //let productAdded = [idProduct, colorProduct, quantityProduct];
+    let productAdded = [idProduct, colorProduct, quantityProduct];
 
-    localStorage.setItem("ID produit", `${idProduct}`);
-    localStorage.setItem("Couleur choisie", `${colorProduct}`);
-    localStorage.setItem("Quantité choisie", `${quantityProduct}`);
+    localStorage.setItem("Produit ajouté au panier", `${productAdded}`);
 })

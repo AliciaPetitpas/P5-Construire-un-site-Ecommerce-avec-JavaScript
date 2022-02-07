@@ -54,17 +54,13 @@ button.addEventListener("click", () => {
         return alert("La quantité maximum est de 100.")
     }
 
-    class product {
-        constructor(id, color, quantity) {
-            this.id = idProduct;
-            this.color = colorProduct;
-            this.quantity = quantityProduct;
-        }
+    const itemCart = {
+        id: idProduct,
+        color: colorProduct,
+        quantity: quantityProduct,
     }
 
-    let productAdded = [idProduct, colorProduct, quantityProduct];
-
-    localStorage.setItem("Panier", productAdded);
+    localStorage.setItem("Panier", JSON.stringify(itemCart));
 
 })
 

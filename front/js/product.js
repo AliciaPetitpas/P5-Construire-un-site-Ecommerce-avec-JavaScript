@@ -61,12 +61,12 @@ button.addEventListener("click", () => {
         quantity: parseInt(quantityProduct),
     };
 
-    //console.log(itemCart);
+    console.log(itemCart);
 
     addCart(itemCart);
 
     function addCart(itemCart) {
-        let cart = localStorage.getItem("addToCart");
+        let cart = localStorage.getItem("Panier");
         let arrayCart = [];
 
         if (cart != null) {

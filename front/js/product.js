@@ -61,32 +61,34 @@ button.addEventListener("click", () => {
         quantity: parseInt(quantityProduct),
     };
 
-    console.log(itemCart);
-
     addCart(itemCart);
+    //console.log(itemCart);
+});
 
-    function addCart(itemCart) {
-        let cart = localStorage.getItem("Panier");
-        let arrayCart = [];
 
-        if (cart != null) {
-            let arrayCart = JSON.parse(cart);
 
-            let cartLine = arrayCart.find(p => p.id == itemCart.id && p.color == itemCart.color);
+function addCart(itemCart) {
+    let cart = localStorage.getItem("Panier");
+    let arrayCart = [];
 
-            if (cartLine) {
-                cartLine.quantity++;
-            } else {
-                arrayCart.push(itemCart);
-            }
+    if (cart != null) {
+        let arrayCart = JSON.parse(cart);
+
+        let cartLine = arrayCart.find(p => p.id == itemCart.id && p.color == itemCart.color);
+
+        if (cartLine) {
+            cartLine.quantity += itemCart.quantity++;
         } else {
             arrayCart.push(itemCart);
         }
-
-        saveCart(arrayCart);
+    } else {
+        arrayCart.push(itemCart);
     }
 
-    function saveCart(arrayCart) {
-        localStorage.setItem("Panier", JSON.stringify(arrayCart));
-    }
-});
+    saveCart(arrayCart);
+    console.log(arrayCart)
+}
+
+function saveCart(arrayCart) {
+    localStorage.setItem("Panier", JSON.stringify(arrayCart));
+}

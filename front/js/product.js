@@ -38,6 +38,7 @@ function makeColors(colors) {
 } // récupère les couleurs du produit
 
 const button = document.getElementById("addToCart");
+//const quantity = document.getElementById("quantity");
 
 button.addEventListener("click", () => {
     let idProduct = searchParams.get("id");
@@ -57,14 +58,35 @@ button.addEventListener("click", () => {
     const itemCart = {
         id: idProduct,
         color: colorProduct,
-        quantity: quantityProduct,
+        quantity: parseInt(quantityProduct),
+    };
+
+    //console.log(itemCart);
+
+    addCart(itemCart);
+
+    function addCart(itemCart) {
+        let cart = localStorage.getItem("addToCart");
+        let arrayCart = [];
+
+        if (cart != null) {
+            let arrayCart = JSON.parse(cart);
+
+            let cartLine = arrayCart.find(p => p.id == itemCart.id && p.color == itemCart.color);
+
+            if (cartLine) {
+                cartLine.quantity++;
+            } else {
+                arrayCart.push(itemCart);
+            }
+        } else {
+            arrayCart.push(itemCart);
+        }
+
+        saveCart(arrayCart);
     }
 
-    localStorage.setItem("Panier", JSON.stringify(itemCart));
-
-})
-
-//Si productadded != localstorage -> new ligne
-
-//Si productadded (id && color) déjà dans le panier -> + quantity
-//sinon new
+    function saveCart(arrayCart) {
+        localStorage.setItem("Panier", JSON.stringify(arrayCart));
+    }
+});

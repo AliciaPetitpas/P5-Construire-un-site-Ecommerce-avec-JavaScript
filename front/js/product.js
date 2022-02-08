@@ -65,14 +65,12 @@ button.addEventListener("click", () => {
     //console.log(itemCart);
 });
 
-
-
 function addCart(itemCart) {
     let cart = localStorage.getItem("Panier");
     let arrayCart = [];
 
     if (cart != null) {
-        let arrayCart = JSON.parse(cart);
+        arrayCart = JSON.parse(cart);
 
         let cartLine = arrayCart.find(p => p.id == itemCart.id && p.color == itemCart.color);
 
@@ -86,7 +84,7 @@ function addCart(itemCart) {
     }
 
     saveCart(arrayCart);
-    console.log(arrayCart)
+    //console.log(arrayCart)
 }
 
 function saveCart(arrayCart) {

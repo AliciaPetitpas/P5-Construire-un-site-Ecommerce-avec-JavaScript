@@ -1,35 +1,12 @@
-let localCart = JSON.parse(localStorage.getItem("Panier")); //récupère le panier de product.js
+let localCart = JSON.parse(localStorage.getItem("Panier")); // récupère le panier de product.js
 console.log(localCart);
-
 
 function addItem() {
 
     for (i = 0; i < localCart.length; i++) {
         const cartItems = document.getElementById('cart__items');
 
-        /* <article class="cart__item" data-id="{product-ID}" data-color="{product-color}">
-                <div class="cart__item__img">
-                  <img src="../images/product01.jpg" alt="Photographie d'un canapé">
-                </div>
-                <div class="cart__item__content">
-                  <div class="cart__item__content__description">
-                    <h2>Nom du produit</h2>
-                    <p>Vert</p>
-                    <p>42,00 €</p>
-                  </div>
-                  <div class="cart__item__content__settings">
-                    <div class="cart__item__content__settings__quantity">
-                      <p>Qté : </p>
-                      <input type="number" class="itemQuantity" name="itemQuantity" min="1" max="100" value="42">
-                    </div>
-                    <div class="cart__item__content__settings__delete">
-                      <p class="deleteItem">Supprimer</p>
-                    </div>
-                  </div>
-                </div>
-              </article> */
-
-        //Balises HTML
+        // balises HTML
 
         const article = document.createElement('article');
         const divImg = document.createElement('div');
@@ -46,23 +23,23 @@ function addItem() {
         const divDelete = document.createElement('div');
         const pDelete = document.createElement('p');
 
-        //Classes et attributs
+        // classes et attributs
 
-        article.classList('cart__item');
+        article.classList.add('cart__item');
         article.setAttribute('data-id', `${localCart[i].id}`);
-        divImg.classList('cart__item__img');
-        divItemCont.classList('cart__item__content');
-        divDescCont.classList('cart__item__content__description');
-        divContent.classList('cart__item__content__settings');
-        divQuantity.classList('cart__item__content__settings__quantity');
-        input.classList('itemQuantity');
+        divImg.classList.add('cart__item__img');
+        divItemCont.classList.add('cart__item__content');
+        divDescCont.classList.add('cart__item__content__description');
+        divContent.classList.add('cart__item__content__settings');
+        divQuantity.classList.add('cart__item__content__settings__quantity');
+        input.classList.add('itemQuantity');
         input.setAttribute('type', 'number');
         input.setAttribute('name', 'itemQuantity');
         input.setAttribute('min', '1');
         input.setAttribute('max', '100');
         input.setAttribute('value', localCart[i].quantity);
-        divDelete.classList('cart__item__content__settings__delete');
-        pDelete.classList('deleteItem');
+        divDelete.classList.add('cart__item__content__settings__delete');
+        pDelete.classList.add('deleteItem');
 
         article.appendChild(divImg) + article.appendChild(divItemCont);
         divImg.appendChild(imgImg);
@@ -70,22 +47,75 @@ function addItem() {
         divImg.querySelector('img').alt = localCart[i].alt;
         divItemCont.appendChild(divDescCont) + divItemCont.appendChild(divContent);
         divDescCont.appendChild(hName) + divDescCont.appendChild(pPrice);
-        divDescCont.querySelector(h2).textContent = localCart[i].name + " - " + localCart[i].color;
-        divDescCont.querySelector(p).textContent = localCart[i].price;
-        //pColor.querySelector(p).textContent = localCart[i].color;
-        //pPrice.querySelector(p).textContent = localCart[i].price;
+        divDescCont.querySelector('h2').textContent = localCart[i].name + " - " + localCart[i].color;
+        divDescCont.querySelector('p').textContent = localCart[i].price;
         divContent.appendChild(divQuantity) + divContent.appendChild(divDelete);
         divQuantity.appendChild(pQuantity) + divQuantity.appendChild(input);
         divQuantity.querySelector('p').textContent = "Quantité : ";
-        let totalPriceProduct = localCart[i].quantity * localCart[i].price; //Prix total par produit
-        divDescCont.querySelector('p').textContent = "Montant total produit :" + totalPriceProduct + "€" + " - " + "Montant unitaire :" + localCart[i].price + "€";
+        let totalPriceProduct = localCart[i].quantity * localCart[i].price;
+        divDescCont.querySelector('p').textContent = "Montant total produit : " + totalPriceProduct + "€" + " - " + "Montant unitaire : " + localCart[i].price + "€";
         divDelete.appendChild(pDelete);
-        pdelete.textContent = "Supprimer";
+        pDelete.textContent = "Supprimer";
 
         cartItems.appendChild(article);
     }
 }
 
-/*
+function totalPriceProduct() {
+    const totalQuant = document.getElementById('totalQuantity');
+    const totalPrice = document.getElementById('totalPrice');
 
-*/
+    let totalQuantityNum = 0;
+    let totalPriceNum = 0;
+
+    for (j = 0; j < localCart.length; j++) {
+        totalQuantityNum += parseInt(localCart[j].quantity);
+        totalPriceNum += localCart[j].price * localCart[j].quantity;
+    }
+
+    totalQuant.textContent = totalQuantityNum;
+    totalPrice.textContent = totalPriceNum;
+}
+
+function modifyCart() {
+    const itemQuantityModif = document.querySelectorAll('.itemQuantity');
+
+    //console.log(localCart);
+
+    for (let k = 0; k < itemQuantityModif.length; k++) {
+        itemQuantityModif[k].addEventListener('change', (event) => {
+            event.preventDefault();
+
+            let itemModif = parseInt(localCart[k].quantity);
+            let modifyValue = parseInt(itemQuantityModif[k].value);
+            let modify = localCart.find(el => el.modifyValue != itemModif);
+            localCart[k].quantity = modifyValue;
+            localStorage.setItem('Panier', JSON.stringify(localCart));
+
+            window.location.reload();
+        });
+    }
+}
+
+function deleteItem() {
+    const deleteBtn = document.querySelectorAll(".deleteItem");
+
+    for (let l = 0; l < deleteBtn.length; l++) {
+        deleteBtn[l].addEventListener("click", (event) => {
+            event.preventDefault();
+
+            let deleteId = localCart[l].id;
+            let deleteColor = localCart[l].color;
+
+            localCart = localCart.filter(el => el.id !== deleteId || el.color !== deleteColor);
+            localStorage.setItem("Panier", JSON.stringify(localCart));
+
+            window.location.reload();
+        });
+    }
+}
+
+addItem();
+totalPriceProduct();
+modifyCart();
+deleteItem();

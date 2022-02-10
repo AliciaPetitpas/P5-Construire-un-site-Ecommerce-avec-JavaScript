@@ -40,25 +40,38 @@ function makeColors(colors) {
 const button = document.getElementById("addToCart");
 //const quantity = document.getElementById("quantity");
 
-button.addEventListener("click", () => {
+button.addEventListener("click", (event) => {
+    event.preventDefault();
+
     let idProduct = searchParams.get("id");
+    let nameProduct = allKanap.name;
     let colorProduct = colors.value;
     let quantityProduct = quantity.value;
+    let priceProduct = allKanap.price;
+    let imgProduct = allKanap.imageUrl;
+    let altProduct = allKanap.altTxt;
 
     if (colorProduct == "") {
-        return alert("Veuillez sélectionner une couleur.")
+        return alert("Veuillez sélectionner une couleur")
     }
-    if (quantityProduct < 1) {
-        return alert("Veuillez sélectionner une quantité.")
+    if (quantityProduct == 0) {
+        return alert("Veuillez sélectionner une quantité minimum de 1")
     }
     if (quantityProduct > 100) {
-        return alert("La quantité maximum est de 100.")
+        return alert("La quantité maximum est de 100")
     }
+    /*if (quantityProduct === NaN) {
+        return alert("La quantité doit être saisie en chiffres")
+    }*/
 
     const itemCart = {
         id: idProduct,
+        name: nameProduct,
         color: colorProduct,
         quantity: parseInt(quantityProduct),
+        price: priceProduct,
+        img: imgProduct,
+        alt: altProduct,
     };
 
     addCart(itemCart);
@@ -85,6 +98,7 @@ function addCart(itemCart) {
 
     saveCart(arrayCart);
     //console.log(arrayCart)
+    alert('Le produit à bien été ajouté à votre panier.')
 }
 
 function saveCart(arrayCart) {

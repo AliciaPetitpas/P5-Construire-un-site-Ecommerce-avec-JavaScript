@@ -60,7 +60,7 @@ button.addEventListener("click", (event) => {
     if (quantityProduct > 100) {
         return alert("La quantité maximum est de 100")
     }
-    /*if (quantityProduct === NaN) {
+    /*if (isNaN(quantityProduct)) {
         return alert("La quantité doit être saisie en chiffres")
     }*/
 

@@ -1,8 +1,8 @@
 // récupération order id
 let params = new URL(document.location).searchParams;
-let id = params.get("id");
-console.log(id);
+let showId = params.get("id");
+console.log(showId);
 
-const nbrOrder = document.getElementById("OrderID");
-nbrOrder.innerHTML = id
+const nbrOrder = document.getElementById("orderId");
+nbrOrder.innerHTML = showId;
 localStorage.clear()

@@ -53,7 +53,7 @@ function addItem() {
         divQuantity.appendChild(pQuantity) + divQuantity.appendChild(input);
         divQuantity.querySelector('p').textContent = "Quantité : ";
         let totalPriceProduct = localCart[i].quantity * localCart[i].price;
-        divDescCont.querySelector('p').textContent = "Montant total produit : " + totalPriceProduct + "€" + " - " + "Montant unitaire : " + localCart[i].price + "€";
+        divDescCont.querySelector('p').textContent = "Montant unitaire : " + localCart[i].price + "€" + " | " + "Montant total : " + totalPriceProduct + "€";
         divDelete.appendChild(pDelete);
         pDelete.textContent = "Supprimer";
 
@@ -247,8 +247,8 @@ function checkForm() {
             localStorage.setItem('Contact', JSON.stringify(contact));
 
             let products = [];
-            for (m = 0; m < localCart.lenght; i++) {
-                products.push(localCart[i].id)
+            for (m = 0; m < localCart.length; m++) {
+                products.push(localCart[m].id)
             }
 
             let submitProducts = { contact, products };

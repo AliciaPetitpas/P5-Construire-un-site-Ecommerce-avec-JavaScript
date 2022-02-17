@@ -122,15 +122,15 @@ function checkForm() {
     let formOrder = document.getElementById("order");
 
     //ENVOI FORMULAIRE
-    formOrder.addEventListener('click', function(event) {
+    formOrder.addEventListener('submit', function(event) {
+        event.preventDefault();
+
         if (!formFirstName.value ||
             !formLastName.value ||
             !formAddress.value ||
             !formCity.value ||
             !formEmail.value
         ) {
-            const order = document.getElementById('order')
-            order.setAttribute('value', 'Veuillez remplir tous les champs')
             return event.preventDefault();
         } else {
             const contact = {

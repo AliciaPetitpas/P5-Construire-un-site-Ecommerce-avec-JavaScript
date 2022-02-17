@@ -24,7 +24,7 @@ fetch("http://localhost:3000/api/products/" + id)
         imgAtt.append(imgEl)
 
         titleAtt.innerHTML = `${allKanap.name}`;
-        priceAtt.innerHTML = `${allKanap.price}`;
+        priceAtt.innerHTML = Intl.NumberFormat().format(allKanap.price);
         descriptionAtt.innerHTML = `${allKanap.description}`;
         colorsAtt.innerHTML += makeColors(allKanap.colors)
     }) // affiche les données du produit choisi

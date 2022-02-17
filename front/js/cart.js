@@ -53,7 +53,7 @@ function addItem() {
         divQuantity.appendChild(pQuantity) + divQuantity.appendChild(input);
         divQuantity.querySelector('p').textContent = "Quantité : ";
         let totalPriceProduct = localCart[i].quantity * localCart[i].price;
-        divDescCont.querySelector('p').textContent = "Montant unitaire : " + localCart[i].price + "€" + " | " + "Montant total : " + totalPriceProduct + "€";
+        divDescCont.querySelector('p').textContent = "Montant unitaire : " + Intl.NumberFormat().format(localCart[i].price) + "€" + " | " + "Montant total : " + Intl.NumberFormat().format(totalPriceProduct) + "€";
         divDelete.appendChild(pDelete);
         pDelete.textContent = "Supprimer";
 
@@ -74,7 +74,7 @@ function totalPriceProduct() {
     }
 
     totalQuant.textContent = totalQuantityNum;
-    totalPrice.textContent = totalPriceNum;
+    totalPrice.textContent = Intl.NumberFormat().format(totalPriceNum);
 }
 
 function modifyCart() {

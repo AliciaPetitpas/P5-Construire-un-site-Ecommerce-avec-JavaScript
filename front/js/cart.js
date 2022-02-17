@@ -2,62 +2,74 @@ let localCart = JSON.parse(localStorage.getItem("Panier")); // récupère le pan
 console.log(localCart);
 
 function addItem() {
+    //panier vide
+    if (localCart === null || localCart == 0) {
 
-    for (i = 0; i < localCart.length; i++) {
-        const cartItems = document.getElementById('cart__items');
+        //console.log("Empty cart");
 
-        // balises HTML
+        document.getElementById("cart__items").innerHTML = `
+            <div class="cart__empty">
+              <p> Votre panier est vide </p>
+            </div>
+          `;
+    } else {
 
-        const article = document.createElement('article');
-        const divImg = document.createElement('div');
-        const imgImg = document.createElement('img');
-        const divItemCont = document.createElement('div');
-        const divDescCont = document.createElement('div');
-        const hName = document.createElement('h2');
-        const pColor = document.createElement('p');
-        const pPrice = document.createElement('p');
-        const divContent = document.createElement('div');
-        const divQuantity = document.createElement('div');
-        const pQuantity = document.createElement('p');
-        const input = document.createElement('input');
-        const divDelete = document.createElement('div');
-        const pDelete = document.createElement('p');
+        for (i = 0; i < localCart.length; i++) {
+            const cartItems = document.getElementById('cart__items');
 
-        // classes et attributs
+            // balises HTML
 
-        article.classList.add('cart__item');
-        article.setAttribute('data-id', `${localCart[i].id}`);
-        divImg.classList.add('cart__item__img');
-        divItemCont.classList.add('cart__item__content');
-        divDescCont.classList.add('cart__item__content__description');
-        divContent.classList.add('cart__item__content__settings');
-        divQuantity.classList.add('cart__item__content__settings__quantity');
-        input.classList.add('itemQuantity');
-        input.setAttribute('type', 'number');
-        input.setAttribute('name', 'itemQuantity');
-        input.setAttribute('min', '1');
-        input.setAttribute('max', '100');
-        input.setAttribute('value', localCart[i].quantity);
-        divDelete.classList.add('cart__item__content__settings__delete');
-        pDelete.classList.add('deleteItem');
+            const article = document.createElement('article');
+            const divImg = document.createElement('div');
+            const imgImg = document.createElement('img');
+            const divItemCont = document.createElement('div');
+            const divDescCont = document.createElement('div');
+            const hName = document.createElement('h2');
+            const pColor = document.createElement('p');
+            const pPrice = document.createElement('p');
+            const divContent = document.createElement('div');
+            const divQuantity = document.createElement('div');
+            const pQuantity = document.createElement('p');
+            const input = document.createElement('input');
+            const divDelete = document.createElement('div');
+            const pDelete = document.createElement('p');
 
-        article.appendChild(divImg) + article.appendChild(divItemCont);
-        divImg.appendChild(imgImg);
-        divImg.querySelector('img').src = localCart[i].img;
-        divImg.querySelector('img').alt = localCart[i].alt;
-        divItemCont.appendChild(divDescCont) + divItemCont.appendChild(divContent);
-        divDescCont.appendChild(hName) + divDescCont.appendChild(pPrice);
-        divDescCont.querySelector('h2').textContent = localCart[i].name + " - " + localCart[i].color;
-        divDescCont.querySelector('p').textContent = localCart[i].price;
-        divContent.appendChild(divQuantity) + divContent.appendChild(divDelete);
-        divQuantity.appendChild(pQuantity) + divQuantity.appendChild(input);
-        divQuantity.querySelector('p').textContent = "Quantité : ";
-        let totalPriceProduct = localCart[i].quantity * localCart[i].price;
-        divDescCont.querySelector('p').textContent = "Montant unitaire : " + Intl.NumberFormat().format(localCart[i].price) + "€" + " | " + "Montant total : " + Intl.NumberFormat().format(totalPriceProduct) + "€";
-        divDelete.appendChild(pDelete);
-        pDelete.textContent = "Supprimer";
+            // classes et attributs
 
-        cartItems.appendChild(article);
+            article.classList.add('cart__item');
+            article.setAttribute('data-id', `${localCart[i].id}`);
+            divImg.classList.add('cart__item__img');
+            divItemCont.classList.add('cart__item__content');
+            divDescCont.classList.add('cart__item__content__description');
+            divContent.classList.add('cart__item__content__settings');
+            divQuantity.classList.add('cart__item__content__settings__quantity');
+            input.classList.add('itemQuantity');
+            input.setAttribute('type', 'number');
+            input.setAttribute('name', 'itemQuantity');
+            input.setAttribute('min', '1');
+            input.setAttribute('max', '100');
+            input.setAttribute('value', localCart[i].quantity);
+            divDelete.classList.add('cart__item__content__settings__delete');
+            pDelete.classList.add('deleteItem');
+
+            article.appendChild(divImg) + article.appendChild(divItemCont);
+            divImg.appendChild(imgImg);
+            divImg.querySelector('img').src = localCart[i].img;
+            divImg.querySelector('img').alt = localCart[i].alt;
+            divItemCont.appendChild(divDescCont) + divItemCont.appendChild(divContent);
+            divDescCont.appendChild(hName) + divDescCont.appendChild(pPrice);
+            divDescCont.querySelector('h2').textContent = localCart[i].name + " - " + localCart[i].color;
+            divDescCont.querySelector('p').textContent = localCart[i].price;
+            divContent.appendChild(divQuantity) + divContent.appendChild(divDelete);
+            divQuantity.appendChild(pQuantity) + divQuantity.appendChild(input);
+            divQuantity.querySelector('p').textContent = "Quantité : ";
+            let totalPriceProduct = localCart[i].quantity * localCart[i].price;
+            divDescCont.querySelector('p').textContent = "Montant unitaire : " + Intl.NumberFormat().format(localCart[i].price) + "€" + " | " + "Montant total : " + Intl.NumberFormat().format(totalPriceProduct) + "€";
+            divDelete.appendChild(pDelete);
+            pDelete.textContent = "Supprimer";
+
+            cartItems.appendChild(article);
+        }
     }
 }
 

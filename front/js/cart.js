@@ -80,8 +80,6 @@ function totalPriceProduct() {
 function modifyCart() {
     const itemQuantityModif = document.querySelectorAll('.itemQuantity');
 
-    //console.log(localCart);
-
     for (let k = 0; k < itemQuantityModif.length; k++) {
         itemQuantityModif[k].addEventListener('change', (event) => {
             event.preventDefault();
@@ -115,7 +113,7 @@ function deleteItem() {
     }
 }
 
-function checkForm() {
+/*function checkForm() {
     const form = document.getElementsByClassName("cart__order__form");
     let formFirstName = document.getElementById("firstName");
     let formLastName = document.getElementById("lastName");
@@ -123,6 +121,54 @@ function checkForm() {
     let formCity = document.getElementById("city");
     let formEmail = document.getElementById("email");
     let formOrder = document.getElementById("order");
+
+    //ENVOI FORMULAIRE
+    formOrder.addEventListener('click', function(event) {
+        if (!formFirstName.value ||
+            !formLastName.value ||
+            !formAddress.value ||
+            !formCity.value ||
+            !formEmail.value
+        ) {
+            const order = document.getElementById('order')
+            order.setAttribute('value', 'Veuillez remplir tous les champs')
+            return event.preventDefault();
+        } else {
+            const contact = {
+                firstName: formFirstName.value,
+                lastName: formLastName.value,
+                address: formAddress.value,
+                city: formCity.value,
+                email: formEmail.value,
+            }
+            localStorage.setItem('Contact', JSON.stringify(contact));
+
+            let products = [];
+            for (m = 0; m < localCart.length; m++) {
+                products.push(localCart[m].id)
+            }
+
+            let submitProducts = { contact, products };
+            console.log(submitProducts);
+
+            fetch("http://localhost:3000/api/products/order", {
+                    method: "POST",
+                    body: JSON.stringify(submitProducts),
+                    headers: {
+                        "content-type": "application/json",
+                    }
+                })
+                .then(res => {
+                    return res.json();
+                }).then((data) => {
+                    let orderId = data.orderId;
+                    window.location.href = `./confirmation.html?id=${orderId}`;
+                    console.log(orderId);
+                }).catch((error) => {
+                    console.log(error);
+                })
+        }
+    });
 
     //EMAIL
     formEmail.addEventListener('change', function() {
@@ -223,62 +269,10 @@ function checkForm() {
             document.getElementById("firstNameErrorMsg").style.color = '#F9BDBD'
         }
     };
-
-    //ENVOI FORMULAIRE
-    formOrder.addEventListener('click', function(event) {
-        event.preventDefault();
-        if (!formFirstName.value ||
-            !formLastName.value ||
-            !formAddress.value ||
-            !formCity.value ||
-            !formEmail.value
-        ) {
-            const order = document.getElementById('order')
-            order.setAttribute('value', 'Veuillez remplir tous les champs')
-            return event.preventDefault();
-        } else {
-            const contact = {
-                firstName: `${formFirstName.value}`,
-                lastName: `${formLastName.value}`,
-                address: `${formAddress.value}`,
-                city: `${formCity.value}`,
-                email: `${formEmail.value}`
-            }
-            localStorage.setItem('Contact', JSON.stringify(contact));
-
-            let products = [];
-            for (m = 0; m < localCart.length; m++) {
-                products.push(localCart[m].id)
-            }
-
-            let submitProducts = { contact, products };
-            console.log(submitProducts);
-
-            fetch("http://localhost:3000/api/products/order", {
-                method: "POST",
-                body: JSON.stringify(submitProducts),
-                headers: {
-                    "content-type": "application/json",
-                }
-            })
-
-            //RETOUR SERVEUR
-            .then(res => {
-                return res.json();
-            }).then((data) => {
-                let orderId = data.orderId;
-                window.location.href = `./confirmation.html?id=${orderId}`;
-                console.log(orderId);
-            }).catch((error) => {
-                console.log(error);
-            })
-        }
-    });
-}
-
+}*/
 
 addItem();
 totalPriceProduct();
 modifyCart();
 deleteItem();
-checkForm();
+//checkForm();

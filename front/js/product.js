@@ -105,11 +105,10 @@ function saveCart(arrayCart) {
     localStorage.setItem("Panier", JSON.stringify(arrayCart));
 }
 
-
 /*
-Intl.NumberFormat("fr-FR", {
-    style: "currency",
-    currency: "EUR", //symbole €
-    minimumFractionDigits: 2,
-}).format(PRIX);
-*/
+function formatPrice() {
+    Intl.NumberFormat("fr-FR", {
+        style: "currency",
+        useGrouping: false,
+    }).format(prix);
+}*/

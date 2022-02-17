@@ -174,7 +174,7 @@ function checkForm() {
         validateEmail(this)
     });
     const validateEmail = function(inputMail) {
-        let emailRegExp = new RegExp('^[a-zA-Z0-9ôöáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ._\s-]+[@]{1}[a-zA-Z0-9.-_]+[.]{1}[a-z]{2,10}$', 'g');
+        let emailRegExp = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
         let testEmail = emailRegExp.test(inputMail.value);
         if (testEmail) {
             formEmail.style.boxShadow = '0px 0px 10px green'
@@ -194,7 +194,7 @@ function checkForm() {
         validateCity(this)
     });
     const validateCity = function(inputCity) {
-        let cityRegExp = new RegExp('^[a-zA-Z-9áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ._\s-]*$', 'g');
+        let cityRegExp = new RegExp('^[a-zA-Z-9áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ._\s-]*.{2,}$', 'g');
         let testCity = cityRegExp.test(inputCity.value)
         if (testCity) {
             formCity.style.boxShadow = '0px 0px 10px green'
@@ -214,7 +214,7 @@ function checkForm() {
         validateAddress(this)
     });
     const validateAddress = function(inputAddress) {
-        let addressRegExp = new RegExp('^[ a-zA-Z0-9áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ._\s -]*$', 'g');
+        let addressRegExp = new RegExp("^[0-9]{1,3}(?:(?:[,. ]){1}[-a-zA-Zàâäéèêëïîôöùûüç]+)+");
         let testAddress = addressRegExp.test(inputAddress.value)
         if (testAddress) {
             formAddress.style.boxShadow = '0px 0px 10px green'
@@ -234,7 +234,7 @@ function checkForm() {
         validateLastName(this)
     });
     const validateLastName = function(inputLastName) {
-        let lastNameRegExp = new RegExp('^[a-zA-ZáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ._\s -]*$', 'g');
+        let lastNameRegExp = new RegExp('^[a-zA-ZáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ._\s -]*.{2,}$', 'g');
         let testLastName = lastNameRegExp.test(inputLastName.value)
         if (testLastName) {
             formLastName.style.boxShadow = '0px 0px 10px green'
@@ -254,7 +254,7 @@ function checkForm() {
         validateFirstName(this)
     });
     const validateFirstName = function(inputFirstName) {
-        let firstNameRegExp = new RegExp('^[a-zA-Z-9áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ._\s -]*$', 'g');
+        let firstNameRegExp = new RegExp('^[a-zA-Z-9áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ._\s -]*.{2,}$', 'g');
         let testFirstName = firstNameRegExp.test(inputFirstName.value)
         if (testFirstName) {
             formFirstName.style.boxShadow = '0px 0px 10px green'

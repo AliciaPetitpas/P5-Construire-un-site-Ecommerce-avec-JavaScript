@@ -113,8 +113,7 @@ function deleteItem() {
     }
 }
 
-/*function checkForm() {
-    const form = document.getElementsByClassName("cart__order__form");
+function checkForm() {
     let formFirstName = document.getElementById("firstName");
     let formLastName = document.getElementById("lastName");
     let formAddress = document.getElementById("address");
@@ -269,10 +268,10 @@ function deleteItem() {
             document.getElementById("firstNameErrorMsg").style.color = '#F9BDBD'
         }
     };
-}*/
+}
 
 addItem();
 totalPriceProduct();
 modifyCart();
 deleteItem();
-//checkForm();
+checkForm();

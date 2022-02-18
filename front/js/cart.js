@@ -80,7 +80,12 @@ function totalPriceProduct() {
     let totalQuantityNum = 0;
     let totalPriceNum = 0;
 
+    if (localCart == null) {
+        return false
+    }
+
     for (j = 0; j < localCart.length; j++) {
+
         totalQuantityNum += parseInt(localCart[j].quantity);
         totalPriceNum += localCart[j].price * localCart[j].quantity;
     }
@@ -134,17 +139,29 @@ function checkForm() {
     let formOrder = document.getElementById("order");
 
     //ENVOI FORMULAIRE
-    formOrder.addEventListener('submit', function(event) {
+    formOrder.addEventListener('click', function(event) {
         event.preventDefault();
 
         if (!formFirstName.value ||
             !formLastName.value ||
             !formAddress.value ||
             !formCity.value ||
-            !formEmail.value
+            !formEmail.value ||
+            localCart == null
         ) {
-            return event.preventDefault();
-        } else {
+            event.preventDefault();
+            return alert('Vous ne pouvez pas passer de commande. Veuillez vérifier votre panier ne soit pas vide et/ou que vos informations soient erronées.');
+        }
+        /*else if (!localCart == null &&
+                   !formFirstName.value ||
+                   !formLastName.value ||
+                   !formAddress.value ||
+                   !formCity.value ||
+                   !formEmail.value
+               ) {
+                   return alert('Veuillez vérifier vos informations avant de commander.')
+               }*/
+        else {
             const contact = {
                 firstName: formFirstName.value,
                 lastName: formLastName.value,

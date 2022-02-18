@@ -54,11 +54,8 @@ button.addEventListener("click", (event) => {
     if (colorProduct == "") {
         return alert("Veuillez sélectionner une couleur")
     }
-    if (quantityProduct === 0) {
-        return alert("Veuillez sélectionner une quantité minimum de 1")
-    }
-    if (quantityProduct > 100) {
-        return alert("La quantité maximum est de 100")
+    if (quantityProduct === 0 || quantityProduct < 0 || quantityProduct > 100) {
+        return alert("Veuillez sélectionner une quantité entre 1 et 100")
     }
     if (isNaN(quantityProduct)) {
         return alert("La quantité doit être saisie en chiffres")

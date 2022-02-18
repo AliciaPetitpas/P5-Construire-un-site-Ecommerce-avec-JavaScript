@@ -104,10 +104,18 @@ function modifyCart() {
             let itemModif = parseInt(localCart[k].quantity);
             let modifyValue = parseInt(itemQuantityModif[k].value);
             let modify = localCart.find(el => el.modifyValue != itemModif);
-            localCart[k].quantity = modifyValue;
-            localStorage.setItem('Panier', JSON.stringify(localCart));
 
-            window.location.reload();
+            if (modifyValue === 0 || modifyValue < 0 || modifyValue > 100) {
+                alert("Veuillez sélectionner une quantité entre 1 et 100");
+                event.preventDefault();
+            } else if (isNaN(modifyValue)) {
+                alert("La quantité doit être saisie en chiffres");
+                event.preventDefault();
+            } else {
+                localCart[k].quantity = modifyValue;
+                localStorage.setItem('Panier', JSON.stringify(localCart));
+                window.location.reload();
+            }
         });
     }
 }
@@ -138,66 +146,6 @@ function checkForm() {
     let formEmail = document.getElementById("email");
     let formOrder = document.getElementById("order");
 
-    //ENVOI FORMULAIRE
-    formOrder.addEventListener('click', function(event) {
-        event.preventDefault();
-
-        if (!formFirstName.value ||
-            !formLastName.value ||
-            !formAddress.value ||
-            !formCity.value ||
-            !formEmail.value ||
-            localCart == null
-        ) {
-            event.preventDefault();
-            return alert('Vous ne pouvez pas passer de commande. Veuillez vérifier votre panier ne soit pas vide et/ou que vos informations soient erronées.');
-        }
-        /*else if (!localCart == null &&
-                   !formFirstName.value ||
-                   !formLastName.value ||
-                   !formAddress.value ||
-                   !formCity.value ||
-                   !formEmail.value
-               ) {
-                   return alert('Veuillez vérifier vos informations avant de commander.')
-               }*/
-        else {
-            const contact = {
-                firstName: formFirstName.value,
-                lastName: formLastName.value,
-                address: formAddress.value,
-                city: formCity.value,
-                email: formEmail.value,
-            }
-            localStorage.setItem('Contact', JSON.stringify(contact));
-
-            let products = [];
-            for (m = 0; m < localCart.length; m++) {
-                products.push(localCart[m].id)
-            }
-
-            let submitProducts = { contact, products };
-            console.log(submitProducts);
-
-            fetch("http://localhost:3000/api/products/order", {
-                    method: "POST",
-                    body: JSON.stringify(submitProducts),
-                    headers: {
-                        "content-type": "application/json",
-                    }
-                })
-                .then(res => {
-                    return res.json();
-                }).then((data) => {
-                    let orderId = data.orderId;
-                    window.location.href = `./confirmation.html?id=${orderId}`;
-                    console.log(orderId);
-                }).catch((error) => {
-                    console.log(error);
-                })
-        }
-    });
-
     //EMAIL
     formEmail.addEventListener('change', function() {
         validateEmail(this)
@@ -215,6 +163,7 @@ function checkForm() {
             formEmail.style.boxSizing = 'border-box'
             document.getElementById("emailErrorMsg").innerHTML = `${inputMail.value} n'est pas une adresse mail valide !`
             document.getElementById("emailErrorMsg").style.color = '#F9BDBD'
+                //alert('Veuillez renseigner une adresse email valide.');
         }
     };
 
@@ -297,6 +246,63 @@ function checkForm() {
             document.getElementById("firstNameErrorMsg").style.color = '#F9BDBD'
         }
     };
+
+    //ENVOI FORMULAIRE
+    formOrder.addEventListener('click', function(event) {
+        event.preventDefault();
+        if (!formFirstName.value ||
+            !formLastName.value ||
+            !formAddress.value ||
+            !formCity.value ||
+            !formEmail.value ||
+            localCart == null
+        ) {
+            event.preventDefault();
+            return alert('Vous ne pouvez pas passer de commande. Veuillez vérifier que votre panier ne soit pas vide et/ou que vos informations ne soient pas erronées.');
+        }
+
+        console.log(validateEmail.value);
+
+        //if (!validateEmail) {
+        //  event.preventDefault();
+        //}
+
+        /*else {
+                   const contact = {
+                       firstName: formFirstName.value,
+                       lastName: formLastName.value,
+                       address: formAddress.value,
+                       city: formCity.value,
+                       email: formEmail.value,
+                   }
+                   localStorage.setItem('Contact', JSON.stringify(contact));
+
+                   let products = [];
+                   for (m = 0; m < localCart.length; m++) {
+                       products.push(localCart[m].id)
+                   }
+
+                   let submitProducts = { contact, products };
+                   console.log(submitProducts);
+
+                   fetch("http://localhost:3000/api/products/order", {
+                           method: "POST",
+                           body: JSON.stringify(submitProducts),
+                           headers: {
+                               "content-type": "application/json",
+                           }
+                       })
+                       .then(res => {
+                           return res.json();
+                       }).then((data) => {
+                           let orderId = data.orderId;
+                           window.location.href = `./confirmation.html?id=${orderId}`;
+                           console.log(orderId);
+                       }).catch((error) => {
+                           console.log(error);
+                       })
+               }*/
+    });
 }
 
 addItem();

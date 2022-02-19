@@ -259,49 +259,45 @@ function checkForm() {
         ) {
             event.preventDefault();
             return alert('Vous ne pouvez pas passer de commande. Veuillez vérifier que votre panier ne soit pas vide et/ou que vos informations ne soient pas erronées.');
+        } else if (!checkForm()) {
+            event.preventDefault();
+            return alert("Veuillez vérifier votre formulaire.")
+                //console.log('Formulaire erroné')
+        } else {
+            const contact = {
+                firstName: formFirstName.value,
+                lastName: formLastName.value,
+                address: formAddress.value,
+                city: formCity.value,
+                email: formEmail.value,
+            }
+            localStorage.setItem('Contact', JSON.stringify(contact));
+
+            let products = [];
+            for (m = 0; m < localCart.length; m++) {
+                products.push(localCart[m].id)
+            }
+
+            let submitProducts = { contact, products };
+            console.log(submitProducts);
+
+            fetch("http://localhost:3000/api/products/order", {
+                    method: "POST",
+                    body: JSON.stringify(submitProducts),
+                    headers: {
+                        "content-type": "application/json",
+                    }
+                })
+                .then(res => {
+                    return res.json();
+                }).then((data) => {
+                    let orderId = data.orderId;
+                    window.location.href = `./confirmation.html?id=${orderId}`;
+                    console.log(orderId);
+                }).catch((error) => {
+                    console.log(error);
+                })
         }
-
-        console.log(validateEmail.value);
-
-        //if (!validateEmail) {
-        //  event.preventDefault();
-        //}
-
-        /*else {
-                   const contact = {
-                       firstName: formFirstName.value,
-                       lastName: formLastName.value,
-                       address: formAddress.value,
-                       city: formCity.value,
-                       email: formEmail.value,
-                   }
-                   localStorage.setItem('Contact', JSON.stringify(contact));
-
-                   let products = [];
-                   for (m = 0; m < localCart.length; m++) {
-                       products.push(localCart[m].id)
-                   }
-
-                   let submitProducts = { contact, products };
-                   console.log(submitProducts);
-
-                   fetch("http://localhost:3000/api/products/order", {
-                           method: "POST",
-                           body: JSON.stringify(submitProducts),
-                           headers: {
-                               "content-type": "application/json",
-                           }
-                       })
-                       .then(res => {
-                           return res.json();
-                       }).then((data) => {
-                           let orderId = data.orderId;
-                           window.location.href = `./confirmation.html?id=${orderId}`;
-                           console.log(orderId);
-                       }).catch((error) => {
-                           console.log(error);
-                       })
-               }*/
     });
 }
 

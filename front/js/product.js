@@ -1,7 +1,7 @@
 let searchParams = new URL(document.location).searchParams;
 let id = searchParams.get("id"); // retrouve les id des produits
 
-console.log(`Produit ${id}`);
+//console.log(`Produit ${id}`);
 
 const imgAtt = document.querySelector('.item__img');
 const titleAtt = document.getElementById("title");
@@ -38,7 +38,6 @@ function makeColors(colors) {
 } // récupère les couleurs du produit
 
 const button = document.getElementById("addToCart");
-//const quantity = document.getElementById("quantity");
 
 button.addEventListener("click", (event) => {
     event.preventDefault();
@@ -95,17 +94,9 @@ function addCart(itemCart) {
 
     saveCart(arrayCart);
     //console.log(arrayCart)
-    alert('Le produit à bien été ajouté à votre panier.')
+    alert('Le produit a bien été ajouté à votre panier.')
 }
 
 function saveCart(arrayCart) {
     localStorage.setItem("Panier", JSON.stringify(arrayCart));
-}
-
-/*
-function formatPrice() {
-    Intl.NumberFormat("fr-FR", {
-        style: "currency",
-        useGrouping: false,
-    }).format(prix);
-}*/
+} //Ajoute les produits au local storage

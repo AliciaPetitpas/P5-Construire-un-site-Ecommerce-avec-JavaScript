@@ -2,11 +2,8 @@ let localCart = JSON.parse(localStorage.getItem("Panier")); // récupère le pan
 console.log(localCart);
 
 function addItem() {
-    //panier vide
+    //si panier vide
     if (localCart === null || localCart == 0) {
-
-        //console.log("Empty cart");
-
         document.getElementById("cart__items").innerHTML = `
             <div class="cart__empty">
               <p> Votre panier est vide </p>
@@ -73,6 +70,7 @@ function addItem() {
     }
 }
 
+//Calcul du coût total des produits
 function totalPriceProduct() {
     const totalQuant = document.getElementById('totalQuantity');
     const totalPrice = document.getElementById('totalPrice');
@@ -94,6 +92,7 @@ function totalPriceProduct() {
     totalPrice.textContent = Intl.NumberFormat().format(totalPriceNum);
 }
 
+//Permet de changer la quantité du produit dans le panier
 function modifyCart() {
     const itemQuantityModif = document.querySelectorAll('.itemQuantity');
 
@@ -120,6 +119,7 @@ function modifyCart() {
     }
 }
 
+//Permet de supprimer un article du panier
 function deleteItem() {
     const deleteBtn = document.querySelectorAll(".deleteItem");
 
@@ -147,7 +147,7 @@ function checkForm() {
     let formOrder = document.getElementById("order");
 
     //EMAIL
-    formEmail.addEventListener('change', function() {
+    formEmail.addEventListener('change', function(event) {
         validateEmail(this)
     });
     const validateEmail = function(inputMail) {
@@ -163,7 +163,6 @@ function checkForm() {
             formEmail.style.boxSizing = 'border-box'
             document.getElementById("emailErrorMsg").innerHTML = `${inputMail.value} n'est pas une adresse mail valide !`
             document.getElementById("emailErrorMsg").style.color = '#F9BDBD'
-                //alert('Veuillez renseigner une adresse email valide.');
         }
     };
 
@@ -249,7 +248,6 @@ function checkForm() {
 
     //ENVOI FORMULAIRE
     formOrder.addEventListener('click', function(event) {
-        event.preventDefault();
         if (!formFirstName.value ||
             !formLastName.value ||
             !formAddress.value ||
@@ -259,10 +257,6 @@ function checkForm() {
         ) {
             event.preventDefault();
             return alert('Vous ne pouvez pas passer de commande. Veuillez vérifier que votre panier ne soit pas vide et/ou que vos informations ne soient pas erronées.');
-        } else if (!checkForm()) {
-            event.preventDefault();
-            return alert("Veuillez vérifier votre formulaire.")
-                //console.log('Formulaire erroné')
         } else {
             const contact = {
                 firstName: formFirstName.value,

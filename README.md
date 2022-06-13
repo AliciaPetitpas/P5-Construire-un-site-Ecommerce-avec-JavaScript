@@ -6,8 +6,8 @@
 
 ## Installation backend
 
-> Clone le repo
-> Depuis le dossier "back" faire la commande `npm install` dans le terminal
+> Clone le repo <br />
+> Depuis le dossier "back" faire la commande `npm install` dans le terminal  <br />
 > Mettre le serveur en route avec `node server`. Le serveur devrait tourner sur le `localhost` port `3000`. Si le port utilisé est différent, il sera affiché dans la console au lancement du serveur, par exemple : `Listening on port 3001`.
 
 ## Frontend
@@ -24,8 +24,8 @@ ___
 
 ## Backend installation
 
-> Clone this repo
-> From the "back" folder of the project, run `npm install`
+> Clone this repo <br />
+> From the "back" folder of the project, run `npm install` <br />
 > Run the server with `node server`. The server should run on `localhost` with default port `3000`. If the
 server runs on another port for any reason, this is printed to the
 console when the server starts, e.g. `Listening on port 3001`.
